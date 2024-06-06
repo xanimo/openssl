@@ -54,6 +54,9 @@ jobs:
     - name: Gather openssl version info
       working-directory: _build
       run: |
+        apps/openssl.exe version -v
+        apps/openssl.exe version -v | awk {print $2}'
+        apps/openssl.exe version -v | awk '{print $2}' | sed -e's/-.*$//'
         echo "OSSL_VERSION=$(apps/openssl.exe version -v | awk '{print $2}' | sed -e's/-.*$//')" >> $GITHUB_ENV
     - name: Set registry keys
       working-directory: _build
